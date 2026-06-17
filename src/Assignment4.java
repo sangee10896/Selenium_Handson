@@ -19,6 +19,16 @@ public class Assignment4 {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Click Here']"))).click();
 
 		Set<String> windows = driver.getWindowHandles();
+
+		String parentWindow = driver.getWindowHandle();
+
+		for (String single : windows) {
+			if (!single.equals(parentWindow)) {
+				driver.switchTo().window(single);
+				break;
+			}
+		}
+
 		Iterator<String> it = windows.iterator();
 		String parentId = it.next();
 		String childId = it.next();
@@ -27,8 +37,6 @@ public class Assignment4 {
 		System.out.println(driver.findElement(By.xpath("//h3")).getText());
 		driver.switchTo().window(parentId);
 		System.out.println(driver.findElement(By.xpath("//h3")).getText());
-		
-		
 
 	}
 
